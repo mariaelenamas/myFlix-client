@@ -27256,12 +27256,7 @@ const MainView = ()=>{
             }, undefined),
             movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                     movie: movie,
-                    onMovieClick: (image)=>{
-                        setSelectedMovie({
-                            ...movie,
-                            Image: image
-                        });
-                    }
+                    onMovieClick: (image)=>setSelectedMovie(movie)
                 }, movie.id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 82,
@@ -27297,9 +27292,7 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        onClick: ()=>{
-            onMovieClick(movie.Image);
-        },
+        onClick: ()=>onMovieClick(),
         children: movie.Title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
