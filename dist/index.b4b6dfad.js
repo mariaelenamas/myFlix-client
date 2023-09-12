@@ -27184,7 +27184,7 @@ const MainView = ()=>{
                 Description: "Fantasy is a genre that features magical and supernatural elements that do not exist in the real world. (Source: bookriot.com)"
             },
             Description: "An 11-year-old orphan living with his unwelcoming aunt, uncle, and cousin, who learns of his own fame as a wizard known to have survived his parents' murder at the hands of the dark wizard Lord Voldemort as an infant when he is accepted to Hogwarts School of Witchcraft and Wizardry. Harry makes close friends and a few enemies during his first year at the school and with the help of his friends, Ron Weasley and Hermione Granger, he faces an attempted comeback by the dark wizard Lord Voldemort. (Source: Wikipedia)",
-            Director: {
+            Directors: {
                 Name: "Chris Columbus",
                 Birthyear: "1958",
                 Deathyear: "-",
@@ -27201,7 +27201,7 @@ const MainView = ()=>{
                 Description: "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter. (Source: Wikipedia)"
             },
             Description: "An eight-year-old troublemaker, mistakenly left home alone, must defend his home against a pair of burglars on Christmas eve. (Source: imdb.com)",
-            Director: {
+            Directors: {
                 Name: "Chris Columbus",
                 Birthyear: "1958",
                 Deathyear: "-",
@@ -27218,7 +27218,7 @@ const MainView = ()=>{
                 Description: "Fantasy is a genre that features magical and supernatural elements that do not exist in the real world. (Source: bookriot.com)"
             },
             Description: "Maleficent is a kind-hearted fairy, who is deceived by the love of her life, Stefan. Soon, she places a curse on his daughter, Aurora, in order to exact revenge. (Source: Wikipedia)",
-            Director: {
+            Directors: {
                 Name: "Robert Stromberg",
                 Birthyear: "1965",
                 Deathyear: "-",
@@ -27269,7 +27269,7 @@ const MainView = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "T4gmoA82wDD6pRiVm/74NSjo6+w=");
+_s(MainView, "PZuhfYeW2nvMQfhY09ZzpdqfDq4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27595,14 +27595,14 @@ const MovieView = ({ movie, onBackClick })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: "Director: "
+                        children: "Directors: "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 24,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.Director.Name
+                        children: movie.Directors.Name
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 25,
