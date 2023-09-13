@@ -14,12 +14,15 @@ export const MovieView = ({ movie, onBackClick }) => {
       </div>
       <div>
         <span>Genres: </span>
-        {movie.Genre.map((genre, index) => (
-          <span key={index}>
-            {genre.Name}
-            {index < movie.Genre.length - 1 ? ', ' : ''}
-          </span>
-        ))}
+        {Array.isArray(movie.Genre) ? (
+          <ul>
+            {movie.Genre.map((genre, index) => (
+              <li key={index}>{genre.Name}</li>
+            ))}
+          </ul>
+        ) : (
+          <span>{movie.Genre.Name}</span>
+        )}
       </div>
       <div>
         <span>Description: </span>
