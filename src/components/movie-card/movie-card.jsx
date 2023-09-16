@@ -10,21 +10,20 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   );
 };
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    Image: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    Year: PropTypes.string.isRequired,
-  }).isRequired,
+MovieCard.proptypes = {
+  Image: PropTypes.string.isRequired,
+  Title: PropTypes.string.isRequired,
+  Year: PropTypes.string.isRequired,
   Genre: PropTypes.arrayOf(
     PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
+      Name: PropTypes.string,
+      Description: PropTypes.string,
     })
-  ).isRequired,
+  ),
+  Description: PropTypes.string.isRequired,
   Directors: PropTypes.shape({
-    Name: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+    Name: PropTypes.string,
+    Birthday: PropTypes.string,
+    Bio: PropTypes.string,
+  }),
 };
