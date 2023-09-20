@@ -25,10 +25,10 @@ export const SignupView = () => {
             }
         }).then((response) => {
             if (response.ok) {
-                alert("Signup successful");
+                alert(response);
                 window.location.reload();
             } else {
-                alert("Signup failed");
+                alert(response);
             }
         });
     };
