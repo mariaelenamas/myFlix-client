@@ -27175,8 +27175,8 @@ var _signupView = require("../signup-view/signup-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const storedToken = localStorage.getItem("token");
+    const storedUser = JSON.parse(localStorage.getItem("myFlixUser"));
+    const storedToken = localStorage.getItem("myFlixToken");
     const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     const [movies, setMovies] = (0, _react.useState)([]);
@@ -27281,7 +27281,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","@parcel/transformer-js/src/esmodule-helpers.js":"dOaw1","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gXFy3"}],"bwuIu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"dOaw1","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gXFy3","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN"}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28449,8 +28449,8 @@ const LoginView = ({ onLoggedIn })=>{
         }).then((response)=>response.json()).then((data)=>{
             console.log("Login response: ", data);
             if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("token", data.token);
+                localStorage.setItem("myFlixUser", JSON.stringify(data.user));
+                localStorage.setItem("myFlixToken", data.token);
                 onLoggedIn(data.user, data.token);
             } else alert("No such user");
         }).catch((e)=>{
@@ -28526,7 +28526,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"dOaw1","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gXFy3"}],"4OGiN":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"dOaw1","react/jsx-dev-runtime":"iTorj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gXFy3","react":"21dqq"}],"4OGiN":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28562,9 +28562,9 @@ const SignupView = ()=>{
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Signup successful");
+                alert(response);
                 window.location.reload();
-            } else alert("Signup failed");
+            } else alert(response);
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
