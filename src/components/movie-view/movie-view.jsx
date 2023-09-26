@@ -1,38 +1,48 @@
+import { Button, Card } from "react-bootstrap";
+import "./movie-view.scss";
+
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <div>
+    <Card className="h-100 movie">
       <div>
-        <img src={movie.Image} />
+        <div>
+          <img className="w-100" src={movie.Image} />
+        </div>
+        <div>
+          <strong>Title: </strong>
+          <span>{movie.Title}</span>
+        </div>
+        <div>
+          <strong>Year: </strong>
+          <span>{movie.Year}</span>
+        </div>
+        <div>
+          <strong>Genres: </strong>
+          {Array.isArray(movie.Genre) ? (
+            <ul>
+              {movie.Genre.map((genre, index) => (
+                <li key={index}>{genre.Name}</li>
+              ))}
+            </ul>
+          ) : (
+            <span>{movie.Genre.Name}</span>
+          )}
+        </div>
+        <div>
+          <strong>Description: </strong>
+          <span>{movie.Description}</span>
+        </div>
+        <div>
+          <strong>Directors: </strong>
+          <span>{movie.Directors.Name}</span>
+        </div>
+        <Button
+          onClick={onBackClick}
+          className="back-button"
+          style={{ cursor: "pointer" }}>
+          Back
+        </Button>
       </div>
-      <div>
-        <span>Title: </span>
-        <span>{movie.Title}</span>
-      </div>
-      <div>
-        <span>Year: </span>
-        <span>{movie.Year}</span>
-      </div>
-      <div>
-        <span>Genres: </span>
-        {Array.isArray(movie.Genre) ? (
-          <ul>
-            {movie.Genre.map((genre, index) => (
-              <li key={index}>{genre.Name}</li>
-            ))}
-          </ul>
-        ) : (
-          <span>{movie.Genre.Name}</span>
-        )}
-      </div>
-      <div>
-        <span>Description: </span>
-        <span>{movie.Description}</span>
-      </div>
-      <div>
-        <span>Directors: </span>
-        <span>{movie.Directors.Name}</span>
-      </div>
-      <button onClick={onBackClick}>Back</button>
-    </div>
+    </Card>
   );
 };
