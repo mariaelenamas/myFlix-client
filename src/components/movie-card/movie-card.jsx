@@ -8,11 +8,11 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       <Card.Body >
         <Card.Title >{movie.Title}</Card.Title>
         <Card.Text>{movie.Directors.Name}</Card.Text>
-        <Button onClick={() => onMovieClick(movie)} variant="link">
+        <Button onClick={() => onMovieClick(movie)} variant="link" style={{ margin: "-13px" }}>
           See more
         </Button>
       </Card.Body>
-    </Card>
+    </Card >
   );
 };
 

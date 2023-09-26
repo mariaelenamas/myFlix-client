@@ -39,12 +39,10 @@ export const MainView = () => {
     <Row className="justify-content-md-center my-3">
       {!user ? (
         <Col md={5}>
-          <div
-            style={{ border: "1px solid #bbb", padding: 10, borderRadius: 3 }}
-          >
-            <LoginView onLoggedIn={(user) => setUser(user)} />
-            or
-            <SignupView />
+          <div style={{ color: "white" }}>
+            <LoginView onLoggedIn={(user) => setUser(user)} style={{ color: "white" }} />
+            <p style={{ margin: "30px 120px" }}>OR</p>
+            <SignupView style={{ color: "white" }} />
           </div>
         </Col>
       ) : selectedMovie ? (
@@ -53,6 +51,7 @@ export const MainView = () => {
             movie={selectedMovie}
             onBackClick={() => setSelectedMovie(null)}
           />
+
         </Col>
       ) : movies.length === 0 ? (
         <div style={{ color: "white" }}>The list is empty!</div>

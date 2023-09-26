@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -39,36 +38,30 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     return (
-        <Container>
-            <Row>
-                <Col>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="formUsername">
-                            <Form.Label>Username:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                                minLength="3"
-                                placeholder="UserName"
-                            />
-                        </Form.Group>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    minLength="3"
+                    placeholder="Username"
+                />
+            </Form.Group>
 
-                        <Form.Group controlId="formPassword">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                placeholder="Password"
-                            />
-                        </Form.Group>
-                        <Button type="submit">Submit</Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Password"
+                />
+            </Form.Group>
+            <Button type="submit" className="btnsubmit">Submit</Button>
+        </Form>
     );
 };
