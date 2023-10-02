@@ -38,6 +38,21 @@ body {
   background-color: #861c1c !important;
 }
 
+nav, nav a {
+  color: #fff !important;
+}
+
+nav .container {
+  border-radius: 0;
+  margin: 0;
+  background-color: #861c1c !important;
+}
+
+nav {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
