@@ -29,11 +29,11 @@ export const LoginView = ({ onLoggedIn }) => {
                     localStorage.setItem("myFlixToken", data.token);
                     onLoggedIn(data.user, data.token);
                 } else {
-                    alert("No such user");
+                    alert(data.message);
                 }
             })
             .catch((e) => {
-                alert("Something went wrong");
+                alert(data.message);
             });
     };
 
