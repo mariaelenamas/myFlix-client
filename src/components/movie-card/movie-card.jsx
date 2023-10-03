@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./movie-card.scss";
 
 export const MovieCard = ({ movie }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <Card className="h-100" style={{ cursor: "pointer" }}>
       <Card.Img variant="top" src={movie.Image} />
       <Card.Body>
         <Card.Title >{movie.Title}</Card.Title>
         <Card.Text>{movie.Directors.Name}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button variant="link" style={{ margin: "-13px" }}>
-            See more
-          </Button>
+        <Link className="seemore-button" to={`/movies/${encodeURIComponent(movie._id)}`}>
+          See More
         </Link>
+        <button
+          variant={isFavorite ? "danger" : "primary"}
+          onClick={toggleFavorite}
+          className="favbutton"
+        >
+          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+        </button>
       </Card.Body>
     </Card >
   );

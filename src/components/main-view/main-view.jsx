@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -34,6 +34,47 @@ export const MainView = () => {
   //     <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
   //   );
   // }
+
+  const toggleFavorite = (movieId) => {
+    if (!user) {
+      alert("Please log in to add movies to your favorites.");
+      return;
+    }
+
+    // Check if the movie is already in the user's favorites
+    const isFavorite = user.FavoriteMovies.includes(movieId);
+
+    // If it's already a favorite, remove it; otherwise, add it
+    const updatedFavorites = isFavorite
+      ? user.FavoriteMovies.filter((id) => id !== movieId)
+      : [...user.FavoriteMovies, movieId];
+
+    // Update the user object with the new favorites list
+    const updatedUser = {
+      ...user,
+      FavoriteMovies: updatedFavorites,
+    };
+
+    // Send the updated user data to your API to persist the changes
+    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedUser),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Update the local user data with the changes
+          setUser(updatedUser);
+        } else {
+          console.log(data);
+          alert("Something went wrong");
+        }
+      });
+  };
+
 
   return (
     <BrowserRouter>
@@ -82,7 +123,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <Col style={{ color: 'white' }}>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
                     <MovieView movies={movies} />
@@ -99,7 +140,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <Col style={{ color: 'white' }}>The list is empty!</Col>
                 ) : (
                   <>
                     {movies.map((movie) => (
