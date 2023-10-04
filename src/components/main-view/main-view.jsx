@@ -36,7 +36,7 @@ export const MainView = () => {
   //   );
   // }
 
-  // Add movie to favorite 
+  // Add movie to Favorites 
   const addToFav = (movieId) => {
 
     fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}/movies/${movieId}`, {
@@ -81,7 +81,7 @@ export const MainView = () => {
       />
 
       <Row className="justify-content-md-center my-3">
-        <Route>
+        <Routes>
           <Route
             path="/signup"
             element={
@@ -173,7 +173,7 @@ export const MainView = () => {
             }
           />
 
-        </Route>
+        </Routes>
       </Row>
     </BrowserRouter>
   );
