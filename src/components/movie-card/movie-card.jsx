@@ -1,15 +1,18 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+export const MovieCard = ({ movie, addToFav, checkIsFav, removeFromFav }) => {
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const toggleFavorite = (id) => {
+    // setIsFavorite(!isFavorite);
+    addToFav(id)
   };
+
+  const removeFav = (id) => {
+    removeFromFav(id)
+  }
 
   return (
     <Card className="h-100" style={{ cursor: "pointer" }}>
@@ -20,13 +23,25 @@ export const MovieCard = ({ movie }) => {
         <Link className="seemore-button" to={`/movies/${encodeURIComponent(movie._id)}`}>
           See More
         </Link>
-        <button
-          variant={isFavorite ? "danger" : "primary"}
-          onClick={toggleFavorite}
-          className="favbutton"
-        >
-          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-        </button>
+        {
+          checkIsFav ? (
+            <button
+              variant={checkIsFav ? "danger" : "primary"}
+              onClick={() => removeFav(movie._id)}
+              className="favbutton"
+            >
+              Remove from Favorites
+            </button>
+          ) : (
+            <button
+              variant={checkIsFav ? "danger" : "primary"}
+              onClick={() => toggleFavorite(movie._id)}
+              className="favbutton"
+            >
+              Add to Favorites
+            </button>
+          )
+        }
       </Card.Body>
     </Card >
   );

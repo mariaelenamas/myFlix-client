@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("myFlixUser"));
@@ -35,46 +36,40 @@ export const MainView = () => {
   //   );
   // }
 
-  const toggleFavorite = (movieId) => {
-    if (!user) {
-      alert("Please log in to add movies to your favorites.");
-      return;
-    }
+  // Add movie to favorite 
+  const addToFav = (movieId) => {
 
-    // Check if the movie is already in the user's favorites
-    const isFavorite = user.FavoriteMovies.includes(movieId);
-
-    // If it's already a favorite, remove it; otherwise, add it
-    const updatedFavorites = isFavorite
-      ? user.FavoriteMovies.filter((id) => id !== movieId)
-      : [...user.FavoriteMovies, movieId];
-
-    // Update the user object with the new favorites list
-    const updatedUser = {
-      ...user,
-      FavoriteMovies: updatedFavorites,
-    };
-
-    // Send the updated user data to your API to persist the changes
-    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedUser),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}/movies/${movieId}`, {
+      method: "Post",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => response.json()).then(data => {
+      console.log('added', data)
+      setUser(data)
+      localStorage.setItem("myFlixUser", JSON.stringify(data));
     })
-      .then((response) => {
-        if (response.ok) {
-          // Update the local user data with the changes
-          setUser(updatedUser);
-        } else {
-          console.log(data);
-          alert("Something went wrong");
-        }
-      });
-  };
 
+  }
+
+  const removeFromFav = (movieId) => {
+
+    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}/${movieId}`, {
+      method: "Delete",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => response.json()).then(data => {
+      console.log('deleted', data)
+      setUser(data)
+      localStorage.setItem("myFlixUser", JSON.stringify(data));
+    })
+  }
+
+  const checkIsFav = (id) => {
+    const fav = user.FavoriteMovies.includes(id)
+    return fav
+  }
+
+  const onLoggedOut = () => {
+    setUser(null);
+  }
 
   return (
     <BrowserRouter>
@@ -84,8 +79,9 @@ export const MainView = () => {
           setUser(null);
         }}
       />
+
       <Row className="justify-content-md-center my-3">
-        <Routes>
+        <Route>
           <Route
             path="/signup"
             element={
@@ -123,11 +119,30 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col style={{ color: 'white' }}>The list is empty!</Col>
+                  <Col style={{ color: "white" }}>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
                     <MovieView movies={movies} />
                   </Col>
+                )}
+              </>
+            }
+          />
+
+          <Route
+            path="/profile" // to check
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <ProfileView user={user}
+                    movies={movies}
+                    onLoggedOut={onLoggedOut}
+                    token={token}
+                    addToFav={(id) => addToFav(id)}
+                    removeFromFav={(id) => removeFromFav(id)}
+                  />
                 )}
               </>
             }
@@ -145,7 +160,11 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard movie={movie}
+                          addToFav={(id) => addToFav(id)}
+                          checkIsFav={checkIsFav(movie._id)}
+                          removeFromFav={(id) => removeFromFav(id)}
+                        />
                       </Col>
                     ))}
                   </>
@@ -153,7 +172,8 @@ export const MainView = () => {
               </>
             }
           />
-        </Routes>
+
+        </Route>
       </Row>
     </BrowserRouter>
   );
