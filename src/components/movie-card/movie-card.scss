@@ -1,9 +1,15 @@
 .seemore-button {
     padding: 4px 12px 4px 12px;
     color: whitesmoke;
-    background-color: rgb(134, 28, 28);
+    background-color: rgb(102, 9, 9);
     border: none;
     border-radius: 4px;
+}
+
+.seemore-button:hover {
+    background-color: rgb(241, 245, 12);
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
 }
 
 .favbutton {
@@ -14,4 +20,10 @@
     border-radius: 4px;
     margin-right: 100px !important;
     margin-top: 20px !important;
+}
+
+.favbutton:hover {
+    background-color: rgb(241, 245, 12);
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
 }

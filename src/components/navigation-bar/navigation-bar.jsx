@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 export const NavigationBar = ({ user, onLoggedOut }) => {
     return (
         <Navbar bg="light" expand="lg" style={{ color: "white" }}>
-            <Container>
+            <Container style={{ padding: "0px" }}>
                 <Navbar.Brand as={Link} to="/">
                     Movie App
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         {!user && (

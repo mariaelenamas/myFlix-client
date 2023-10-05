@@ -94,7 +94,7 @@ export const UserEdit = ({ user, token, updateUser, onLoggedOut }) => {
                 />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="mt-4">
+            <Button variant="primary" type="submit" className="btnsubmit">
                 Submit
             </Button>
         </Form>

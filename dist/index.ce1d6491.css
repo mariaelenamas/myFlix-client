@@ -3,7 +3,7 @@
 }
 
 .container {
-  background-color: #861c1c;
+  background-color: #660909;
   border-radius: 10px;
   margin: 30px 50px;
   padding: 30px 30px 10px;
@@ -15,6 +15,9 @@
 
 .btnsubmit {
   margin-top: 20px;
+  color: #000 !important;
+  background-color: #ffc !important;
+  border: 1px solid #000 !important;
 }
 
 .back-button {
@@ -35,7 +38,7 @@
 }
 
 body {
-  background-color: #861c1c !important;
+  background-color: #660909 !important;
 }
 
 nav, nav a {
@@ -45,7 +48,7 @@ nav, nav a {
 nav .container {
   border-radius: 0;
   margin: 0;
-  background-color: #861c1c !important;
+  background-color: #660909 !important;
 }
 
 nav {
@@ -13407,10 +13410,16 @@ textarea.form-control-lg {
 
 .seemore-button {
   color: #f5f5f5;
-  background-color: #861c1c;
+  background-color: #660909;
   border: none;
   border-radius: 4px;
   padding: 4px 12px;
+}
+
+.seemore-button:hover {
+  color: #000;
+  background-color: #f1f50c;
+  border: 2px solid #000;
 }
 
 .favbutton {
@@ -13423,12 +13432,25 @@ textarea.form-control-lg {
   margin-right: 100px !important;
 }
 
+.favbutton:hover {
+  color: #000;
+  background-color: #f1f50c;
+  border: 2px solid #000;
+}
+
 .back-button {
   color: #f5f5f5;
-  background-color: #861c1c;
+  background-color: #660909;
   border: none;
   border-radius: 4px;
-  padding: 4px 12px;
+  margin-left: 9px;
+  padding: 5px 10px;
+}
+
+.back-button:hover {
+  color: #000;
+  background-color: #f1f50c;
+  border: 2px solid #000;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

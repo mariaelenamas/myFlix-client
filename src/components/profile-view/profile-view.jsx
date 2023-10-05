@@ -38,7 +38,7 @@ export const ProfileView = ({
 
     return (
         <>
-            <Col>
+            <Col style={{ color: "white" }}>
                 <UserInfo user={user} />
                 <UserEdit
                     user={user}
@@ -55,19 +55,21 @@ export const ProfileView = ({
                             deleteAccount();
                         }
                     }}
+                    style={{ border: '1px solid white' }}
                 >
                     Delete your Account
                 </Button>
             </Col>
-            <Col>
-                <h3 className="mt-3 mb-3 white-text">Your favorite movies:</h3>
-            </Col>
+
+            <h3 style={{ color: "white", margin: "30px" }} >Your favorite movies:</h3>
+
             {favoriteMovies.map((movie) => (
                 <Col key={movie.id} className="mb-4" xl={2} lg={3} md={4} xs={6}>
                     <MovieCard movie={movie} checkIsFav={true}
                         addToFav={(id) => addToFav(id)}
                         removeFromFav={(id) => removeFromFav(id)} />
                 </Col>
+
             ))}
         </>
     );
