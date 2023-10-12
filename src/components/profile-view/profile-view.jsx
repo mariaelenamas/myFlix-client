@@ -51,7 +51,7 @@ export const ProfileView = ({
                     variant="danger"
                     type="submit"
                     onClick={() => {
-                        if (confirm("Sure to delete your account?")) {
+                        if (window.confirm("Sure to delete your account?")) {
                             deleteAccount();
                         }
                     }}
@@ -64,7 +64,7 @@ export const ProfileView = ({
             <h3 style={{ color: "white", margin: "30px" }} >Your favorite movies:</h3>
 
             {favoriteMovies.map((movie) => (
-                <Col key={movie.id} className="mb-4" xl={2} lg={3} md={4} xs={6}>
+                <Col key={movie._id} className="mb-4" xl={2} lg={3} md={4} xs={6}>
                     <MovieCard movie={movie} checkIsFav={true}
                         addToFav={(id) => addToFav(id)}
                         removeFromFav={(id) => removeFromFav(id)} />
