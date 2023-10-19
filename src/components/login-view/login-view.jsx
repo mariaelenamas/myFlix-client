@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = ({ setToken }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const dispatch = useDispatch();
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -27,13 +29,14 @@ export const LoginView = ({ onLoggedIn }) => {
                 if (data.user) {
                     localStorage.setItem("myFlixUser", JSON.stringify(data.user));
                     localStorage.setItem("myFlixToken", data.token);
-                    onLoggedIn(data.user, data.token);
+                    setToken(data.token)
+                    dispatch(setUser(data.user));
                 } else {
                     alert(data.message);
                 }
             })
             .catch((e) => {
-                alert(data.message);
+                alert(e.message);
             });
     };
 

@@ -9,24 +9,32 @@ import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/reducers/movies";
+
+
 export const MainView = () => {
+  const dispatch = useDispatch();
   const storedUser = JSON.parse(localStorage.getItem("myFlixUser"));
   const storedToken = localStorage.getItem("myFlixToken");
-  const [user, setUser] = useState(storedUser ? storedUser : null);
+  // const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  const [movies, setMovies] = useState([]);
+  const movies = useSelector((state) => state.movies);
+  const user = useSelector((state) => state.user);
+  //const token = useSelector((state) => state.user );
 
   useEffect(() => {
+    console.log(token)
     if (!token) {
       return;
     }
-
+    console.log(user)
     fetch("https://movie-api-n1v9.onrender.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
       .then((res) => {
-        setMovies(res);
+        dispatch(setMovies(res));
       });
   }, [token]);
 
@@ -73,12 +81,7 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar
-        user={user}
-        onLoggedOut={() => {
-          setUser(null);
-        }}
-      />
+      <NavigationBar />
 
       <Row className="justify-content-md-center my-3">
         <Routes>
@@ -105,7 +108,7 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView setToken={setToken} />
                   </Col>
                 )}
               </>
@@ -113,7 +116,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/movies/:id" // to check
+            path="/movies/:id"
             element={
               <>
                 {!user ? (
@@ -122,7 +125,7 @@ export const MainView = () => {
                   <Col style={{ color: "white" }}>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} />
+                    <MovieView />
                   </Col>
                 )}
               </>
@@ -130,7 +133,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/profile" // to check
+            path="/profile"
             element={
               <>
                 {!user ? (
