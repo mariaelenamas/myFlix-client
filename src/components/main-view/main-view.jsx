@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -11,18 +12,19 @@ import { ProfileView } from "../profile-view/profile-view";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
-
-
+import { MoviesList } from "../movies-list/movies-list"; // NEW
+import { MoviesFilter } from "../movies-filter/movies-filter";
 export const MainView = () => {
   const dispatch = useDispatch();
   const storedUser = JSON.parse(localStorage.getItem("myFlixUser"));
   const storedToken = localStorage.getItem("myFlixToken");
   // const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  const movies = useSelector((state) => state.movies);
+  // const movies = useSelector((state) => state.movies); Change with the following:
+  const movies = useSelector((state) => state.movies.list);
   const user = useSelector((state) => state.user);
   //const token = useSelector((state) => state.user );
-
+  console.log(movies)
   useEffect(() => {
     console.log(token)
     if (!token) {
@@ -125,7 +127,7 @@ export const MainView = () => {
                   <Col style={{ color: "white" }}>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView />
+                    <MoviesList movies={movies} />
                   </Col>
                 )}
               </>
@@ -161,7 +163,8 @@ export const MainView = () => {
                   <Col style={{ color: 'white' }}>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    <MoviesList />
+                    {/* {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard movie={movie}
                           addToFav={(id) => addToFav(id)}
@@ -169,7 +172,7 @@ export const MainView = () => {
                           removeFromFav={(id) => removeFromFav(id)}
                         />
                       </Col>
-                    ))}
+                    ))} */}
                   </>
                 )}
               </>
