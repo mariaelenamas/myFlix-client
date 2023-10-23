@@ -49684,14 +49684,22 @@ const MoviesFilter = ()=>{
     _s();
     const filter = (0, _reactRedux.useSelector)((state)=>state.movies.filter);
     const dispatch = (0, _reactRedux.useDispatch)();
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-        type: "text",
-        placeholder: "Search...",
-        value: filter,
-        onChange: (e)=>dispatch((0, _movies.setFilter)(e.target.value))
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "col-12 mx-auto",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
+            className: "searchbar my-2",
+            type: "text",
+            placeholder: "Search...",
+            value: filter,
+            onChange: (e)=>dispatch((0, _movies.setFilter)(e.target.value))
+        }, void 0, false, {
+            fileName: "src/components/movies-filter/movies-filter.jsx",
+            lineNumber: 11,
+            columnNumber: 13
+        }, undefined)
     }, void 0, false, {
         fileName: "src/components/movies-filter/movies-filter.jsx",
-        lineNumber: 9,
+        lineNumber: 10,
         columnNumber: 9
     }, undefined);
 };
