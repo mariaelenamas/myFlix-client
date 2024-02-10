@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
+import { useEffect, useState } from "react";
 
-export const MovieCard = ({ movie, addToFav, checkIsFav, removeFromFav }) => {
+export const MovieCard = ({ movie, addToFav, checkIsFav, removeFromFav, addToWatch, remToWatch, checkIsWatch }) => {
 
+  const [watch, setwatch] = useState(false)
   const toggleFavorite = (id) => {
     // setIsFavorite(!isFavorite);
     addToFav(id)
@@ -13,6 +15,21 @@ export const MovieCard = ({ movie, addToFav, checkIsFav, removeFromFav }) => {
   const removeFav = (id) => {
     removeFromFav(id)
   }
+
+  const addtoWatch = (id) => {
+    addToWatch(id)
+  }
+  const remtoWatch = (id) => {
+    remToWatch(id)
+  }
+
+  const isWATCH = (id) => {
+    checkIsWatch(id)
+
+  }
+  useEffect(() => {
+    setwatch(checkIsWatch(movie._id))
+  }, [watch])
 
   return (
     <Card className="h-100" style={{ cursor: "pointer" }}>
@@ -39,6 +56,25 @@ export const MovieCard = ({ movie, addToFav, checkIsFav, removeFromFav }) => {
               className="favbutton"
             >
               Add to Favorites
+            </button>
+          )
+        }
+        {
+          watch ? (
+            <button
+              variant={isWATCH(movie._id) ? "danger" : "primary"}
+              onClick={(id) => remtoWatch(movie._id)}
+              className="favbutton"
+            >
+              Remove from to watch
+            </button>
+          ) : (
+            <button
+              variant={isWATCH(movie._id) ? "danger" : "primary"}
+              onClick={(id) => addtoWatch(movie._id)}
+              className="favbutton"
+            >
+              Add to Watch List
             </button>
           )
         }

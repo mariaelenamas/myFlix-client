@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
 import { MoviesList } from "../movies-list/movies-list"; // NEW
 import { MoviesFilter } from "../movies-filter/movies-filter";
+import { setUser } from "../../redux/reducers/user";
 export const MainView = () => {
   const dispatch = useDispatch();
   const storedUser = JSON.parse(localStorage.getItem("myFlixUser"));
@@ -24,13 +25,12 @@ export const MainView = () => {
   const movies = useSelector((state) => state.movies.list);
   const user = useSelector((state) => state.user);
   //const token = useSelector((state) => state.user );
-  console.log(movies)
+
   useEffect(() => {
-    console.log(token)
     if (!token) {
       return;
     }
-    console.log(user)
+
     fetch("https://movie-api-n1v9.onrender.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -53,11 +53,9 @@ export const MainView = () => {
       method: "Post",
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => response.json()).then(data => {
-      console.log('added', data)
       setUser(data)
       localStorage.setItem("myFlixUser", JSON.stringify(data));
     })
-
   }
 
   const removeFromFav = (movieId) => {
@@ -66,14 +64,39 @@ export const MainView = () => {
       method: "Delete",
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => response.json()).then(data => {
-      console.log('deleted', data)
       setUser(data)
+      localStorage.setItem("myFlixUser", JSON.stringify(data));
+    })
+  }
+
+  const addToWatch = (movieId) => {
+
+    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}/towatch/${movieId}`, {
+      method: "Post",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => response.json()).then(data => {
+      dispatch(setUser(data));
+      localStorage.setItem("myFlixUser", JSON.stringify(data));
+    })
+  }
+
+  const remToWatch = (movieId) => {
+
+    fetch(`https://movie-api-n1v9.onrender.com/users/${user.Username}/towatch/${movieId}`, {
+      method: "Delete",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => response.json()).then(data => {
+      dispatch(setUser(data));
       localStorage.setItem("myFlixUser", JSON.stringify(data));
     })
   }
 
   const checkIsFav = (id) => {
     const fav = user.FavoriteMovies.includes(id)
+    return fav
+  }
+  const checkIsWatch = (id) => {
+    const fav = user.ToWatch.includes(id)
     return fav
   }
 
@@ -127,7 +150,7 @@ export const MainView = () => {
                   <Col style={{ color: "white" }}>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MoviesList movies={movies} />
+                    <MoviesList addToWatch={(id) => addToWatch(id)} remToWatch={(id) => remToWatch(id)} checkIsWatch={(id) => checkIsWatch(id)} />
                   </Col>
                 )}
               </>
@@ -147,6 +170,7 @@ export const MainView = () => {
                     token={token}
                     addToFav={(id) => addToFav(id)}
                     removeFromFav={(id) => removeFromFav(id)}
+                    addToWatch={(id) => addToWatch(id)} remToWatch={(id) => remToWatch(id)} checkIsWatch={(id) => checkIsWatch(id)}
                   />
                 )}
               </>
@@ -163,7 +187,7 @@ export const MainView = () => {
                   <Col style={{ color: 'white' }}>The list is empty!</Col>
                 ) : (
                   <>
-                    <MoviesList />
+                    <MoviesList addToWatch={(id) => addToWatch(id)} remToWatch={(id) => remToWatch(id)} checkIsWatch={(id) => checkIsWatch(id)} />
                     {/* {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard movie={movie}

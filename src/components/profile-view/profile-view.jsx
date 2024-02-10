@@ -10,7 +10,8 @@ export const ProfileView = ({
     movies,
     updateUser,
     onLoggedOut,
-    addToFav, removeFromFav
+    addToFav, removeFromFav,
+    addToWatch, remToWatch, checkIsWatch
 }) => {
     let favoriteMovies = movies.filter((m) =>
         user.FavoriteMovies.includes(m._id)
@@ -67,7 +68,9 @@ export const ProfileView = ({
                 <Col key={movie._id} className="mb-4" xl={2} lg={3} md={4} xs={6}>
                     <MovieCard movie={movie} checkIsFav={true}
                         addToFav={(id) => addToFav(id)}
-                        removeFromFav={(id) => removeFromFav(id)} />
+                        removeFromFav={(id) => removeFromFav(id)}
+                        addToWatch={(id) => addToWatch(id)} remToWatch={(id) => remToWatch(id)} checkIsWatch={(id) => checkIsWatch(id)}
+                    />
                 </Col>
 
             ))}
